@@ -24,6 +24,17 @@ function readJsonPromise(file) {
     });
 }
 
+function readFilePromise(file) {
+    return new Promise(function(fullfill, reject) {
+        fs.readFile(file, function(err, data) {
+            if(err) {
+                return reject(err);
+            }
+            fullfill(data);
+        });
+    });
+}
+
 function innerPromiseOrderExecution(items, promiseFunction, results) {
     var item = items.shift();
     if(items.length > 0) {
@@ -48,5 +59,6 @@ function executePromisesInOrder(items, promiseFunction) {
 module.exports = {
     createError: createError,
     readJsonPromise: readJsonPromise,
+    readFilePromise: readFilePromise
     executePromisesInOrder: executePromisesInOrder
 }
