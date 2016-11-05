@@ -1,0 +1,24 @@
+{
+    "gitlab": {
+        "url": "http://localhost",
+        "token": "abcdefghij123456",
+        "project_id": 1,
+        "export_label": "export",
+        "difficulty_mapping": {
+            "trivial": "trivial",
+            "easy": "easy",
+            "medium": "medium",
+            "hard": "hard"
+        }
+    },
+    "habitica": {
+        "uuid": "your-habitica.com-user-id",
+        "token": "your-habitica.com-api-token",
+        "difficulty_mapping": {
+            "trivial": 0.1,
+            "easy": 1,
+            "medium": 1.5,
+            "hard": 2
+        }
+    }
+}
