@@ -1,4 +1,4 @@
-const file_logger = require("tracer").dailyfile({ stackIndex: 2, root: "logs", maxLogFiles: 10, allLogsFileName: "gitlhabitica" });
+const file_logger = require("tracer").dailyfile({ stackIndex: 2, root: "logs", maxLogFiles: 10, allLogsFileName: "app" });
 const console_logger = require("tracer").colorConsole( { stackIndex: 2, dateformat : "yyyy-mm-dd HH:MM:ss.l" } );
 
 function log(level, log_arguments) {
