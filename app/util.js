@@ -59,6 +59,6 @@ function executePromisesInOrder(items, promiseFunction) {
 module.exports = {
     createError: createError,
     readJsonPromise: readJsonPromise,
-    readFilePromise: readFilePromise
+    readFilePromise: readFilePromise,
     executePromisesInOrder: executePromisesInOrder
 }
