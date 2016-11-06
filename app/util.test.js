@@ -20,4 +20,9 @@ describe("Test util functions", function() {
             assert.equal(results.length, 0);
         });
     });
+    it("test read file promise", function() {
+        return util.readFilePromise("test/readFilePromise.txt").then(function(text) {
+            assert.equal("" + text, "Some text here\n");
+        });
+    });
 });

@@ -14,24 +14,27 @@ function createError(message, cause) {
 }
 
 function readJsonPromise(file) {
-    return new Promise(function (fullfill, reject) {
-        fs.readJson(file, function(err, json) {
-            if(err) {
-                return reject(err);
-            }
-            fullfill(json);
-        });
-    });
+    return promise(fs.readJson, file);
 }
 
 function readFilePromise(file) {
+    return promise(fs.readFile, file);
+}
+
+function promise(func) {
+    var args = Array.from(arguments);
+    args.splice(0, 1);
     return new Promise(function(fullfill, reject) {
-        fs.readFile(file, function(err, data) {
+        function callback() {
+            var args = Array.from(arguments);
+            var err = args.splice(0, 1)[0];
             if(err) {
                 return reject(err);
             }
-            fullfill(data);
-        });
+            fullfill.apply(fullfill, args);
+        }
+        args.push(callback);
+        func.apply(func, args);
     });
 }
 
@@ -60,5 +63,6 @@ module.exports = {
     createError: createError,
     readJsonPromise: readJsonPromise,
     readFilePromise: readFilePromise,
-    executePromisesInOrder: executePromisesInOrder
+    executePromisesInOrder: executePromisesInOrder,
+    promise: promise
 }
