@@ -1,7 +1,8 @@
 const assert = require("assert");
 const util = require("./util");
+const fs = require("fs");
 
-describe("Test util functions", function() {
+describe("Util functions", function() {
     function timesTwo(number) {
         return new Promise(function(fullfill, reject) {
             fullfill(number * 2);
@@ -23,6 +24,23 @@ describe("Test util functions", function() {
     it("test read file promise", function() {
         return util.readFilePromise("test/readFilePromise.txt").then(function(text) {
             assert.equal("" + text, "Some text here\n");
+        });
+    });
+    it("test write file promise", function() {
+        var text = "random text here";
+        var file = "test/writeFilePromise.txt";
+        return util.promise(fs.writeFile, file, text).then(function() {
+            return util.promise(fs.readFile, file, "utf8");
+        }).then(function(text) {
+            assert.equal(text, text);
+        });
+    });
+    it("test write file promise fail", function() {
+        var text = "should not be written";
+        var file = "does_not_exist/writeFilePromise.txt";
+        return util.promise(fs.writeFile, file, text).catch(function(error) {
+            var expected = "ENOENT: no such file or directory, open 'does_not_exist/writeFilePromise.txt'";
+            assert.equal(error.message, expected);
         });
     });
 });
