@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@git.gorlug.de:10022/nodejs/gorlug-util.git"
+    "url": "git+https://github.com/gorlug/gorlug-util.git"
   },
   "keywords": [
     "util"
